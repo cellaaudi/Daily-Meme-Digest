@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/drawable/ic_round_comment_24.xml" value="0.242" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/drawable/ic_round_favorite_24.xml" value="0.242" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/drawable/ic_round_favorite_border_24.xml" value="0.242" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/drawable/toggle_selector.xml" value="0.242" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/activity_create_account.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/activity_login.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/activity_main.xml" value="0.22735507246376813" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/card_meme.xml" value="0.253125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/fragment_home.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/fragment_leaderboard.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/DailyMemeDigest/app/src/main/res/layout/fragment_mine.xml" value="0.22735507246376813" />

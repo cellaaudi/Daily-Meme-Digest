@@ -15,4 +15,6 @@
     <color name="bg_dark">#252525</color>
     <color name="primary_dark">#5e92f3</color>
     <color name="secondary_dark">#ffd740</color>
+
+    <color name="red">#ff5643</color>
 </resources>
