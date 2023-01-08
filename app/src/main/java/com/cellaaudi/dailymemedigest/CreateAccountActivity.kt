@@ -23,39 +23,35 @@ class CreateAccountActivity : AppCompatActivity() {
             var pass = txtPassNew.text.toString()
             var pass2 = txtPass2New.text.toString()
 
-            val sdf = SimpleDateFormat("MM yyyy")
+            val sdf = SimpleDateFormat("MMMM yyyy")
             val date = sdf.format(Date()).toString()
 
             if (pass == pass2) {
                 val q = Volley.newRequestQueue(this)
                 val url = "https://ubaya.fun/native/160420004/memes/createaccount.php"
-
                 val stringRequest = object : StringRequest(com.android.volley.Request.Method.POST, url,
                     Response.Listener {
                         Log.d("cekparams", it)
-
                         var obj = JSONObject(it)
-
+                        Toast.makeText(this, obj.getString("message"), Toast.LENGTH_SHORT).show()
                         if (obj.getString("result") == "success") {
-                            Toast.makeText(this, obj.getString("message"), Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                     },
                     Response.ErrorListener {
-                        Log.d("cekparams2", it.message.toString()) }
+                        Log.d("cekparams2", it.message.toString())
+                        Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
                 ) {
                     override fun getParams(): Map<String, String?> {
                         val params = HashMap<String, String?>()
                         params.put("username", username)
                         params.put("password", pass)
                         params.put("reg_date", date)
-
                         return params
                     }
                 }
-
                 q.add((stringRequest))
-
-//                finish()
             } else {
                 Toast.makeText(this, "Repeated password is different", Toast.LENGTH_SHORT).show()
             }
