@@ -1,32 +1,22 @@
 package com.cellaaudi.dailymemedigest
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_settings.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SettingsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SettingsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -37,23 +27,57 @@ class SettingsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var sharedFile = "com.cellaaudi.dailymemedigest"
+        var shared: SharedPreferences = view.context.getSharedPreferences(sharedFile, Context.MODE_PRIVATE )
+        var editor: SharedPreferences.Editor = shared.edit()
+
+        var user_id = shared.getInt("USER_ID", 0)
+        var username = shared.getString("USERNAME", "username")
+        var first_name = shared.getString("FIRST_NAME", "first")
+        var last_name: String? = shared?.getString("LAST_NAME", "last")
+        var reg_date = shared.getString("REG_DATE", "reg_date")
+        var setting = shared.getString("SETTING", "Show")
+
+        txtNameSet.text = first_name + last_name
+        txtSinceSet.text = "Active since " + reg_date
+        txtUsernameSet.text = username
+        txtFirstNameSet.setText(first_name)
+        if (last_name != null) {
+            txtSurnameSet.setText(last_name)
+        }
+        if (setting == "Show") {
+            cbHide!!.isChecked = false
+        } else if (setting == "Hide") {
+            cbHide!!.isChecked = true
+        }
+
+        fabOut.setOnClickListener {
+            activity?.let {
+                editor.clear()
+                editor.apply()
+
+                val intent = Intent(it, LoginActivity::class.java)
+                it.startActivity(intent)
+            }
+        }
+
+        btnSaveSet.setOnClickListener {
+            if (txtFirstNameSet.text.toString().length > 0) {
+
+            } else {
+                Toast.makeText(activity, "At least give us your first name", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SettingsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             SettingsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
             }
     }
 }

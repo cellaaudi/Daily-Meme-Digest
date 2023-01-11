@@ -1,5 +1,7 @@
 package com.cellaaudi.dailymemedigest
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,12 +16,22 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class CreateAccountActivity : AppCompatActivity() {
+    val REQUEST_SELECT_AVATAR = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
 
         btnCreateAccNew.setOnClickListener {
+//            avatarNew.setOnClickListener {
+//                val intent = Intent(Intent.ACTION_PICK)
+//                intent.setType("image/*")
+//                startActivityForResult(intent, REQUEST_SELECT_AVATAR)
+//            }
+
             var username = txtUsernameNew.text.toString()
+            var first_name = txtNameNew.text.toString()
+            var last_name = txtSurnameNew?.text.toString()
             var pass = txtPassNew.text.toString()
             var pass2 = txtPass2New.text.toString()
 
@@ -46,8 +58,13 @@ class CreateAccountActivity : AppCompatActivity() {
                     override fun getParams(): Map<String, String?> {
                         val params = HashMap<String, String?>()
                         params.put("username", username)
+                        params.put("first_name", first_name)
+                        if (last_name != null) {
+                            params.put("last_name", last_name)
+                        }
                         params.put("password", pass)
                         params.put("reg_date", date)
+//                        params.put("avatar", "")
                         return params
                     }
                 }
@@ -57,4 +74,12 @@ class CreateAccountActivity : AppCompatActivity() {
             }
         }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (requestCode == Activity.RE)
+//        }
+//    }
 }

@@ -24,14 +24,14 @@ class MemeAdapter(val memes: ArrayList<Meme>): RecyclerView.Adapter<MemeAdapter.
         holder.v.txtBottom.text = memes[position].bottom
         holder.v.txtLikes.text = memes[position].likes.toString() + " likes"
 
-        holder.v.btnLike.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-
-            } else {
-
-            }
-
-        }
+//        holder.v.btnLike.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked) {
+//
+//            } else {
+//
+//            }
+//
+//        }
     }
 
     override fun getItemCount(): Int {

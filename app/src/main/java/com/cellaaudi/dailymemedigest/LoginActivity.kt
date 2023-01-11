@@ -15,11 +15,25 @@ import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
     companion object {
+        var USER_ID = ""
         var USERNAME = ""
+        var FIRST_NAME = ""
+        var LAST_NAME: String? = ""
+        var REG_DATE = ""
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+//        var userName = Global.username
+
+//        if (userName != "") {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//
+//            finish()
+//        }
 
         var sharedFile = "com.cellaaudi.dailymemedigest"
         var shared: SharedPreferences = getSharedPreferences(sharedFile, Context.MODE_PRIVATE )
@@ -42,9 +56,15 @@ class LoginActivity : AppCompatActivity() {
                     var obj = JSONObject(it)
                     Toast.makeText(this, obj.getString("message"), Toast.LENGTH_SHORT).show()
                     if (obj.getString("result") == "success") {
-                        Global.login(username)
-                        editor.putString(USERNAME, username)
+                        val data = obj.getJSONObject("data")
+                        editor.putInt("USER_ID", data.getInt("user_id"))
+                        editor.putString("USERNAME", data.getString("username"))
+                        editor.putString("FIRST_NAME", data.getString("first_name"))
+                        editor.putString("LAST_NAME", data.getString("last_name"))
+                        editor.putString("REG_DATE", data.getString("reg_date"))
+                        editor.putString("SETTING", data.getString("privacy_setting"))
                         editor.apply()
+//                        Global.login(username)
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }

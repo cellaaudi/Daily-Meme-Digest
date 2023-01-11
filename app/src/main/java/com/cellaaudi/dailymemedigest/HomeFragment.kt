@@ -1,5 +1,6 @@
 package com.cellaaudi.dailymemedigest
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -23,10 +24,32 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fab.setOnClickListener {
+            activity?.let {
+                val intent = Intent(it, CreateMemeActivity::class.java)
+                it.startActivity(intent)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         val q = Volley.newRequestQueue(activity)
         val url = "https://ubaya.fun/native/160420004/memes/getmemes.php"
-
         var stringRequest = StringRequest(
             Request.Method.POST, url,
             Response.Listener<String> {
@@ -35,6 +58,7 @@ class HomeFragment : Fragment() {
 
                 if (obj.getString("result") == "success") {
                     val data = obj.getJSONArray("data")
+                    memes.clear()
 
                     for (i in 0 until data.length()) {
                         val memeObj = data.getJSONObject(i)
@@ -58,14 +82,6 @@ class HomeFragment : Fragment() {
         )
 
         q.add(stringRequest)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     companion object {
